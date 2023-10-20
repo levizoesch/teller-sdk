@@ -2,8 +2,8 @@
 
 namespace LeviZoesch\TellerSDK;
 
-use App\Enums\Features\Accounting\Banking\TellerIo\EnvironmentTypes;
 use JsonException;
+use LeviZoesch\TellerSDK\Enums\EnvironmentTypes;
 
 class TellerClient
 {
@@ -124,7 +124,7 @@ class TellerClient
             'Authorization: Basic ' . $accessToken
         ];
 
-        $tellerEnvironment = config('traqza.TELLER.ENVIRONMENT');
+        $tellerEnvironment = config('teller.ENVIRONMENT');
 
         $curl = curl_init();
 
