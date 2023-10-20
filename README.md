@@ -89,3 +89,92 @@ $allAccountTransactions = $teller->listAccountPayees($actId, $scheme);
 $teller = new TellerClient($accessToken);
 $allAccountTransactions = $teller->createAccountPayee($actId, $scheme, $data);
 ```
+
+# Quick & Dirty Example:
+I will update this more in the future...
+
+To initiate 
+
+Add the button.
+```html 
+<button
+    type="button"
+    id="teller-connect"
+    class="btn btn-primary btn-dark btn-lg">
+    <strong>Link Institution</strong>
+</button>
+```
+Add the javascript.
+```javascript
+<script 
+    src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.6.16/sweetalert2.all.js" 
+    integrity="sha512-OOP8+9w8oPEn71RWL6nuGSfcyHtxeNHHyA5jwf9ecn53OQr2aEizblDzG+Esl+6CByZBTfp/bn2At5oBqwGFYw==" 
+    crossorigin="anonymous" 
+    referrerpolicy="no-referrer"></script>
+
+document.addEventListener("DOMContentLoaded", function() {
+    const tellerConnect = TellerConnect.setup({
+        applicationId: '{{ config('teller.TELLER.APP_ID') }}',
+        onInit: function () {
+            //console.log("Teller Connect has initialized");
+        },
+        onSuccess: function (enrollment) {
+            Swal.fire({
+                title: "Account Alias",
+                text: "What is the account nick name?",
+                input: 'text',
+                showCancelButton: false,
+                confirmButtonColor: 'green'
+            }).then((result) => {
+                if (result.value) {
+
+                    const url = "{{ route('teller.account.store') }}";
+
+                    const formData = {
+                        "accessToken": enrollment.accessToken,
+                        "institution": enrollment.enrollment.institution.name,
+                        "enrollment_id": enrollment.enrollment.id,
+                        "user_id": enrollment.user.id,
+                        "alias": result.value,
+                        "_token": "{{ csrf_token() }}"
+                    };
+
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: formData,
+                        success: function (data) {
+                            let result = JSON.parse(data);
+
+                            if (result.success) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    html: result.message
+                                }).then(function() {
+                                    location.reload();
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    html: result.message
+                                }).then(function() {
+                                    location.reload();
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        },
+        onExit: function () {
+            //console.log("User closed Teller Connect");
+        }
+    });
+
+    const el = document.getElementById("teller-connect");
+    el.addEventListener("click", function() {
+        tellerConnect.open();
+    });
+});
+
+```
