@@ -1,8 +1,10 @@
 # teller-sdk
 A simple open source SDK to get started with Teller.io for Laravel.
 
-# Contributions 
+# Contributions & Community
 I encourage others to contribute to this package &#x2764;
+
+To join the discord for discussions, and help please join us at [Teller SDK Discord Server](https://discord.gg/gzAevzAKxC)
 
 # Installation
 
