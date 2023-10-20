@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace LeviZoesch\TellerSDK;
 
 use App\Models\TellerAccount;
 use App\Models\TellerWebhooks;

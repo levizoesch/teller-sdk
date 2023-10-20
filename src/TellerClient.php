@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace LeviZoesch\TellerSDK;
 
 use App\Enums\Features\Accounting\Banking\TellerIo\EnvironmentTypes;
 use JsonException;
