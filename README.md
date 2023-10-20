@@ -22,6 +22,19 @@ TELLER_APP_ID=
 TELLER_PUBLIC_KEY=
 TELLER_WEBHOOK_SECRET_KEY=
 ```
+
+#### Included Helper Command ([Laravel Set Environment](https://github.com/levizoesch/LaravelSetEnvironment))
+This is helpful for automating your repository to push to local, staging, or production servers using a CLI like Bitbucket Pipeline, or Github.
+
+You may use to create, or update environment keys.
+
+```
+php artisan env:set TELLER_ENIRONMENT=development
+php artisan env:set TELLER_APP_ID=
+php artisan env:set TELLER_PUBLIC_KEY=
+php artisan env:set TELLER_WEBHOOK_SECRET_KEY=
+```
+
 ### Available Teller.io Environments.
 The available environments are
 `sandbox`, `development`, and `production` for your `TELLER_ENVIRONMENT`.
