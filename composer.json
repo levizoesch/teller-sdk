@@ -1,12 +1,12 @@
 {
-    "name": "levizoesch/TellerSDK",
+    "name": "levizoesch/teller-sdk",
     "description": "A simple SDK to consume Teller.io for Laravel.",
     "keywords": [
         "levizoesch",
         "teller",
         "laravel"
     ],
-    "homepage": "https://github.com/levizoesch/TellerSDK",
+    "homepage": "https://github.com/levizoesch/teller-sdk",
     "license": "MIT",
     "authors": [
         {
