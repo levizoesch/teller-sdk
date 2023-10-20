@@ -59,14 +59,6 @@ class TellerClient
     /**
      * @throws JsonException
      */
-    public function listAccountTransactionsFrom($accountId, $transactionId)
-    {
-        return $this->get("/accounts/{$accountId}/transactions?from_id={$transactionId}");
-    }
-
-    /**
-     * @throws JsonException
-     */
     public function getAccountTransaction($accountId, $transactionId)
     {
         return $this->get("/accounts/{$accountId}/transactions/{$transactionId}");

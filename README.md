@@ -1,2 +1,73 @@
 # teller-sdk
-A simple SDK to get started with Teller.io for Laravel
+A simple open source SDK to get started with Teller.io for Laravel.
+
+# Contributions 
+I encourage others to contribute to this package &#x2764;
+
+# Installation
+
+`composer require levizoesch/teller-sdk`
+
+# Teller Certificates
+
+This package requires that you have the teller provided private key, and certificate .pem file present within your main directory. This is provided to you when you create a https://teller.io/ developer account.
+
+```
+../YourLaravelDirectory/teller_cert.pem
+../YourLaravelDirectory/teller_pk.pem
+```
+
+# Teller.io Documentation
+
+```
+https://teller.io/docs/api
+```
+
+# Included Endpoints
+
+Teller.io will provide you with an access token. You will initiate the TellerClient with this provide token.
+
+```php
+$accessToken = "test_token_xxxxxxxxxx";
+```
+
+### List Accounts
+```php
+$teller = new TellerClient($accessToken);
+$allAccounts = $teller->listAccounts();
+```
+### List Accounts Count
+```php
+$teller = new TellerClient($accessToken);
+$totalAccountCount = $teller->accountsCount();
+```
+### Get Account Details
+```php
+$teller = new TellerClient($accessToken);
+$accountDetails = $teller->getAccountDetails($actId);
+```
+### Get Account Balances
+```php
+$teller = new TellerClient($accessToken);
+$balance = $teller->getAccountBalances($actId);
+```
+### List All Account Transactions
+```php
+$teller = new TellerClient($accessToken);
+$allAccountTransactions = $teller->listAccountTransactions($actId);
+```
+### Get the specific account transaction details
+```php
+$teller = new TellerClient($accessToken);
+$allAccountTransactions = $teller->listAccountTransactions($actId, $trxId);
+```
+### List Account Payees
+```php
+$teller = new TellerClient($accessToken);
+$allAccountTransactions = $teller->listAccountPayees($actId, $scheme);
+```
+### Create Account Payee
+```php
+$teller = new TellerClient($accessToken);
+$allAccountTransactions = $teller->createAccountPayee($actId, $scheme, $data);
+```
