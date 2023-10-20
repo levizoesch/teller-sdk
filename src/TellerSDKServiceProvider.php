@@ -10,6 +10,6 @@ class TellerSDKServiceProvider extends PackageServiceProvider
     public function configurePackage(Package $package): void
     {
         $package->name('teller-sdk')
-            ->hasConfigFile();
+            ->hasConfigFile('teller');
     }
 }
