@@ -8,6 +8,24 @@ I encourage others to contribute to this package &#x2764;
 
 `composer require levizoesch/teller-sdk`
 
+### Configuration File
+You will need to publish the configuration file.
+
+`php artisan vendor:publish --tag=teller-sdk-config`
+
+### Environment Configuration
+You will also need to add the following to your `.env` file.
+
+```
+TELLER_ENVIRONMENT=sandbox
+TELLER_APP_ID=
+TELLER_PUBLIC_KEY=
+TELLER_WEBHOOK_SECRET_KEY=
+```
+#### Available Teller.io Environments.
+The available environments are
+`sandbox`, `development`, and `production` for your `TELLER_ENVIRONMENT`.
+
 # Teller Certificates
 
 This package requires that you have the teller provided private key, and certificate .pem file present within your main directory. This is provided to you when you create a https://teller.io/ developer account.
