@@ -36,6 +36,13 @@
             "LeviZoesch\\TellerSDK\\Tests\\": "tests"
         }
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "LeviZoesch\TellerSDK\TellerSDKServiceProvider"
+            ]
+        }
+    },
     "config": {
         "sort-packages": true
     }
