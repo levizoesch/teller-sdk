@@ -22,11 +22,11 @@ TELLER_APP_ID=
 TELLER_PUBLIC_KEY=
 TELLER_WEBHOOK_SECRET_KEY=
 ```
-#### Available Teller.io Environments.
+### Available Teller.io Environments.
 The available environments are
 `sandbox`, `development`, and `production` for your `TELLER_ENVIRONMENT`.
 
-# Teller Certificates
+### Teller Certificates
 
 This package requires that you have the teller provided private key, and certificate .pem file present within your main directory. This is provided to you when you create a https://teller.io/ developer account.
 
@@ -90,6 +90,67 @@ $teller = new TellerClient($accessToken);
 $allAccountTransactions = $teller->createAccountPayee($actId, $scheme, $data);
 ```
 
+# Webhooks
+You may want to consume the teller.io webhook. To do so, you will need to create a TellerWebhookController.
+
+use `php artisan make:controller TellerWebhookController` this will create a new controller in your `app/Http/Controllers/TellerWebhookController.php`
+
+Configure your new controller
+
+```php
+
+class TellerWebhookController extends Controller
+{
+
+    /**
+     * @throws JsonException
+     */
+    public function handleWebhook(Request $request)
+    {
+        $payload = json_decode($request->getContent(), true, 512, JSON_THROW_ON_ERROR);
+
+        // Store Webhook
+        TellerWebhooks::createWebhookRecord($payload);
+
+        // Handle Webhook
+        $found = TellerAccount::where('enrollmentId', $payload['payload']['enrollment_id'])
+        ->first();
+
+        if ($found) {
+
+            $status = match ($payload['payload']['reason']) {
+                'disconnected' => 'Disconnected',
+                'disconnected.account_locked' => 'Account Locked',
+                'disconnected.enrollment_inactive' => 'Inactive',
+                'disconnected.credentials_invalid' => 'Invalid Credentials',
+                'disconnected.user_action.captcha_required' => 'Captcha Required',
+                'disconnected.user_action.mfa_required' => 'MFA Required',
+                'disconnected.user_action.web_login_required' => 'Login Required',
+                default => 'Unknown',
+            };
+
+            TellerAccount::where('enrollmentId', $payload['payload']['enrollment_id'])
+            ->update([
+                'status' => $status
+            ]);
+        }
+
+        return $payload;
+    }
+}
+
+```
+
+Add the route to the `web.php` file.
+
+```php
+Route::post('teller/webhook', [TellerWebhookController::class, 'handleWebhook'])->name('teller.webhook');
+```
+
+Now update your Teller.io developer dashboard and point the webhook to your project. See `Application` menu button on Teller
+
+![img.png](img.png)
+
 # Quick & Dirty Example:
 I will update this more in the future...
 
@@ -114,7 +175,7 @@ Add the javascript.
 
 document.addEventListener("DOMContentLoaded", function() {
     const tellerConnect = TellerConnect.setup({
-        applicationId: '{{ config('teller.TELLER.APP_ID') }}',
+        applicationId: "{{ config('teller.TELLER.APP_ID') }}",
         onInit: function () {
             //console.log("Teller Connect has initialized");
         },
@@ -178,3 +239,14 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 ```
+
+
+# Future Goals
+- Build out the API Endpoints further.
+- Throw exceptions
+- Unit Tests
+- Setup Codecov.com
+- Add webhook verification (only consume data strictly from Teller.io)
+- Add Default Views for no hassle implementation of Teller SDK into a laravel project.
+- Add [Laravel Livewire](https://github.com/livewire/livewire)
+- Add [Laravel Livewire Tables by Rappasoft](https://github.com/rappasoft/laravel-livewire-tables/)
