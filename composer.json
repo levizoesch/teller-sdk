@@ -39,7 +39,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "LeviZoesch\TellerSDK\TellerSDKServiceProvider"
+                "LeviZoesch\\TellerSDK\\TellerSDKServiceProvider"
             ]
         }
     },
