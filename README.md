@@ -1,5 +1,5 @@
 # teller-sdk
-A simple open source SDK to get started with Teller.io for Laravel.
+A simple open source SDK to interact with Teller.io for Laravel.
 
 # Contributions & Community
 I encourage others to contribute to this package &#x2764;
