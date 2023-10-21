@@ -132,8 +132,8 @@ class TellerClient
         }
 
         if ($tellerEnvironment === EnvironmentTypes::PRODUCTION || $tellerEnvironment === EnvironmentTypes::DEVELOPMENT) {
-            curl_setopt($curl, CURLOPT_SSLCERT, base_path('teller_cert.pem'));
-            curl_setopt($curl, CURLOPT_SSLKEY, base_path('teller_pk.pem'));
+            curl_setopt($curl, CURLOPT_SSLCERT, config('teller.key_path'));
+            curl_setopt($curl, CURLOPT_SSLKEY, config('teller.cert_path'));
         }
 
         $response = curl_exec($curl);
