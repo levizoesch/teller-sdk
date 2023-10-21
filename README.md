@@ -4,18 +4,34 @@ A simple open source SDK to interact with Teller.io for Laravel ^9.0 & 10
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/levizoesch/teller-sdk.svg?style=flat-square)](https://packagist.org/packages/levizoesch/teller-sdk)
 [![Total Downloads](https://img.shields.io/packagist/dt/levizoesch/teller-sdk.svg?style=flat-square)](https://packagist.org/packages/levizoesch/teller-sdk)
-
+[![codecov](https://codecov.io/gh/levizoesch/teller-sdk/graph/badge.svg?token=TTXHIKIRD4)](https://codecov.io/gh/levizoesch/teller-sdk)
 ---
 
-# Future Goals
-- Build out the API Endpoints further.
-- Throw exceptions
-- Unit Tests
-- Setup Codecov.com
-- Add webhook verification (only consume data strictly from Teller.io)
-- Add Default views,models, and migrations for no hassle implementation of Teller SDK into a laravel project.
-- Add [Laravel Livewire](https://github.com/livewire/livewire)
-- Add [Laravel Livewire Tables by Rappasoft](https://github.com/rappasoft/laravel-livewire-tables/)
+# Goals & Plans
+
+#### API Endpoints.
+
+Capture all available endpoints by teller.io. 
+
+Remaining to do are around payments / zelle enabled institutions.
+
+#### Exceptions & Error Reporting
+
+Expand the exceptions thrown to better help contain edge cases that may be present in production.
+
+#### Unit Tests - In progress
+
+Unit testing is very important to me, as I do not want to introduce bugs to package users. Goal is to expand unit testing to 90% or greater.
+#### ~~Setup Codecov.com~~ &check; Completed
+#### webhook verification (only consume data strictly from Teller.io)
+
+#### Blade Views & Templates:
+Create a set of blade views and templates that are easy to use and integrate into a user's application.
+
+#### Models & Migrations:
+Develop models and migrations that are essential for the functionality of the package. 
+
+##### Add [Livewire](https://github.com/livewire/livewire) capabilities with [Laravel Livewire Tables by Rappasoft](https://github.com/rappasoft/laravel-livewire-tables/) driven tables.
 
 ---
 
