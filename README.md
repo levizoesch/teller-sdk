@@ -190,50 +190,51 @@ $allAccountTransactions = $teller->createAccountPayee($actId, $data);
 # Webhooks
 You may want to consume the teller.io webhook. To do so, you will need to create a TellerWebhookController.
 
-use `php artisan make:controller TellerWebhookController` this will create a new controller in your `app/Http/Controllers/TellerWebhookController.php`
+```
+php artisan make:controller TellerWebhookController
+```
+this will create a new controller in your Controllers directory
+```
+app/Http/Controllers/TellerWebhookController.php
+```
 
-Configure your new controller
+To configure your new controller add the store method below.
 
 ```php
-
-class TellerWebhookController extends Controller
+/**
+ * @throws JsonException
+ */
+public function store(Request $request)
 {
+    $payload = json_decode($request->getContent(), true, 512, JSON_THROW_ON_ERROR);
 
-    /**
-     * @throws JsonException
-     */
-    public function handleWebhook(Request $request)
-    {
-        $payload = json_decode($request->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    // Store Webhook
+    TellerWebhooks::createWebhookRecord($payload);
 
-        // Store Webhook
-        TellerWebhooks::createWebhookRecord($payload);
+    // Handle Webhook
+    $found = TellerAccount::where('enrollmentId', $payload['payload']['enrollment_id'])
+    ->first();
 
-        // Handle Webhook
-        $found = TellerAccount::where('enrollmentId', $payload['payload']['enrollment_id'])
-        ->first();
+    if ($found) {
 
-        if ($found) {
+        $status = match ($payload['payload']['reason']) {
+            'disconnected' => 'Disconnected',
+            'disconnected.account_locked' => 'Account Locked',
+            'disconnected.enrollment_inactive' => 'Inactive',
+            'disconnected.credentials_invalid' => 'Invalid Credentials',
+            'disconnected.user_action.captcha_required' => 'Captcha Required',
+            'disconnected.user_action.mfa_required' => 'MFA Required',
+            'disconnected.user_action.web_login_required' => 'Login Required',
+            default => 'Unknown',
+        };
 
-            $status = match ($payload['payload']['reason']) {
-                'disconnected' => 'Disconnected',
-                'disconnected.account_locked' => 'Account Locked',
-                'disconnected.enrollment_inactive' => 'Inactive',
-                'disconnected.credentials_invalid' => 'Invalid Credentials',
-                'disconnected.user_action.captcha_required' => 'Captcha Required',
-                'disconnected.user_action.mfa_required' => 'MFA Required',
-                'disconnected.user_action.web_login_required' => 'Login Required',
-                default => 'Unknown',
-            };
-
-            TellerAccount::where('enrollmentId', $payload['payload']['enrollment_id'])
-            ->update([
-                'status' => $status
-            ]);
-        }
-
-        return $payload;
+        TellerAccount::where('enrollmentId', $payload['payload']['enrollment_id'])
+        ->update([
+            'status' => $status
+        ]);
     }
+
+    return $payload;
 }
 
 ```
@@ -241,7 +242,11 @@ class TellerWebhookController extends Controller
 Add the route to the `web.php` file.
 
 ```php
-Route::post('teller/webhook', [TellerWebhookController::class, 'handleWebhook'])->name('teller.webhook');
+Route::resource('teller/webhook', TellerWebhookController::class, [
+    'names' => [
+        'store' => 'teller.webhook.store'
+    ]
+])->only('store');
 ```
 
 Now update your Teller.io developer dashboard and point the webhook to your project. See `Application` menu button on Teller
