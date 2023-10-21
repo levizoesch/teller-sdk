@@ -283,6 +283,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
 ```
 
+# Exceptions
+Exceptions will be thrown for various reasons. The exceptions are as follows:
+
+- `MissingTellerConfigurationException` will be thrown if the `teller.php` config file is missing.
 
 # Future Goals
 - Build out the API Endpoints further.
