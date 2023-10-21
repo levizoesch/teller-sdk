@@ -1,11 +1,30 @@
-# teller-sdk
+# Teller API SDK
 
-A simple open source SDK to interact with Teller.io for Laravel.
+A simple open source SDK to interact with Teller.io for Laravel ^9.0 & 10
+
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/levizoesch/teller-sdk.svg?style=flat-square)](https://packagist.org/packages/levizoesch/teller-sdk)
+[![Total Downloads](https://img.shields.io/packagist/dt/levizoesch/teller-sdk.svg?style=flat-square)](https://packagist.org/packages/levizoesch/teller-sdk)
+
+---
+
+# Future Goals
+- Build out the API Endpoints further.
+- Throw exceptions
+- Unit Tests
+- Setup Codecov.com
+- Add webhook verification (only consume data strictly from Teller.io)
+- Add Default views,models, and migrations for no hassle implementation of Teller SDK into a laravel project.
+- Add [Laravel Livewire](https://github.com/livewire/livewire)
+- Add [Laravel Livewire Tables by Rappasoft](https://github.com/rappasoft/laravel-livewire-tables/)
+
+---
 
 # Contributions & Community
 I encourage others to contribute to this package &#x2764;
 
 To join the discord for discussions, and help please join us at [Teller SDK Discord Server](https://discord.gg/gzAevzAKxC)
+
+---
 
 # Installation
 
@@ -51,15 +70,28 @@ This package requires that you have the teller provided private key, and certifi
 ../YourLaravelDirectory/teller_pk.pem
 ```
 
+Alternatively, you may alter the `teller` configuration file and define the path to the file location.
+
+*Note* The name of the file is irrelevant, you may define your own naming convention for the `.pem` files.
+
+```php
+'KEY_PATH' => base_path('your/directory/path/teller_pk.pem'),
+'CERT_PATH' => base_path('your/directory/path/teller_cert.pem'),
+```
+
+---
+
 # Teller.io Documentation
+For more context, and up-to-date teller API information see
 
 ```
 https://teller.io/docs/api
 ```
+---
 
 # Included Endpoints
 
-Teller.io will provide you with an access token. You will initiate the TellerClient with this provide token.
+Teller.io will provide you with an access token. You will initiate the TellerClient with this provided token.
 
 ```php
 $accessToken = "test_token_xxxxxxxxxx";
@@ -90,7 +122,7 @@ $teller = new TellerClient($accessToken);
 $accountDetails = $teller->getAccountDetails($actId);
 ```
 ### Get Account Balances
-Provides your application with live, real-time account balances.
+Retrieves live, real-time account balances.
 ```php
 $teller = new TellerClient($accessToken);
 $balance = $teller->getAccountBalances($actId);
@@ -102,11 +134,21 @@ $teller = new TellerClient($accessToken);
 $allAccountTransactions = $teller->listAccountTransactions($actId);
 ```
 ### Get the specific account transaction details
-Returns an individual transaction.
+Returns an individual transaction details.
 ```php
 $teller = new TellerClient($accessToken);
 $allAccountTransactions = $teller->getTransactionDetails($actId, $trxId);
 ```
+### Identity
+Identity provides you with all of the accounts the end-user granted your application access authorization along with beneficial owner identity information for each of them. Beneficial owner information is attached to each account as it's possible the end-user is not the beneficial owner, e.g. a corporate account, or there is more than one beneficial owner, e.g. a joint account the end-user shares with their partner.
+```php
+$teller = new TellerClient($accessToken);
+$identity = $teller->listIdentity($actId);
+```
+
+---
+## Zelle *Limited
+Depending on the banking institution, you may or may not have access to zelle features. For those institutions that have this feature.
 ### List Account Payees
 
 ```php
@@ -127,12 +169,7 @@ $data = {
 }
 $allAccountTransactions = $teller->createAccountPayee($actId, $data);
 ```
-### Identity
-Identity provides you with all of the accounts the end-user granted your application access authorization along with beneficial owner identity information for each of them. Beneficial owner information is attached to each account as it's possible the end-user is not the beneficial owner, e.g. a corporate account, or there is more than one beneficial owner, e.g. a joint account the end-user shares with their partner.
-```php
-$teller = new TellerClient($accessToken);
-$identity = $teller->listIdentity($actId);
-```
+---
 # Webhooks
 You may want to consume the teller.io webhook. To do so, you will need to create a TellerWebhookController.
 
@@ -193,6 +230,8 @@ Route::post('teller/webhook', [TellerWebhookController::class, 'handleWebhook'])
 Now update your Teller.io developer dashboard and point the webhook to your project. See `Application` menu button on Teller
 
 ![img.png](img.png)
+
+---
 
 # Quick & Dirty Example:
 I will update this more in the future...
@@ -290,13 +329,3 @@ Exceptions will be thrown for various reasons. The exceptions are as follows:
 ```
 Please run 'php artisan vendor:publish --tag=teller-sdk-config' to generate.
 ```
-
-# Future Goals
-- Build out the API Endpoints further.
-- Throw exceptions
-- Unit Tests
-- Setup Codecov.com
-- Add webhook verification (only consume data strictly from Teller.io)
-- Add Default Views for no hassle implementation of Teller SDK into a laravel project.
-- Add [Laravel Livewire](https://github.com/livewire/livewire)
-- Add [Laravel Livewire Tables by Rappasoft](https://github.com/rappasoft/laravel-livewire-tables/)
