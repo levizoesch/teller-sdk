@@ -4,8 +4,8 @@ return [
      * The location in the laravel project where your keys are stored.
      * base_path('your/path/to/keys/teller_pk.pem')
      */
-    'KEY_PATH' => base_path('teller_pk.pem'),
-    'CERT_PATH' => base_path('teller_cert.pem'),
+    'KEY_PATH' => app_path('teller_pk.pem'),
+    'CERT_PATH' => app_path('teller_cert.pem'),
 
     'ENVIRONMENT' => env('TELLER_ENVIRONMENT', env('TELLER_ENVIRONMENT')),
     'APP_ID' => env('TELLER_APP_ID', env('TELLER_APP_ID')),
