@@ -1,0 +1,14 @@
+/node_modules/
+/public/hot/
+/public/storage/
+/storage/*.key
+.phpunit.result.cache
+coverage.xml
+/.idea/
+/vendor/
+.env
+!/config/database.php
+teller_cert.pem
+teller_pk.pem
+/docker/wsl/DockerDesktopWSL/
+/.phpunit.cache/

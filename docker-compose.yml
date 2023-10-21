@@ -1,0 +1,91 @@
+version: "3.9"
+volumes:
+  db-store:
+  psysh-store:
+  db_data:
+networks:
+  laravel:
+    driver: bridge
+services:
+
+  app:
+    container_name: TellerSDKAPP
+    build:
+      context: .
+      dockerfile: ./docker/php/Dockerfile
+      target: ${APP_BUILD_TARGET:-base}
+    volumes:
+      - type: bind
+        source: .
+        target: /workspace
+      - type: volume
+        source: psysh-store
+        target: /root/.config/psysh
+        volume:
+          nocopy: true
+    environment:
+      - APP_DEBUG=${APP_DEBUG:-true}
+      - APP_ENV=${APP_ENV:-local}
+      - APP_URL=${APP_URL:-http://localhost}
+      - DB_CONNECTION=${DB_CONNECTION:-mysql}
+      - DB_HOST=${DB_HOST:-TellerSDKDataBase}
+      - DB_PORT=${DB_PORT:-3306}
+      - DB_DATABASE=${DB_DATABASE:-tellersdk}
+      - DB_USERNAME=${DB_USERNAME:-username}
+      - DB_PASSWORD=${DB_PASSWORD:-password}
+
+  web:
+    container_name: TellerSDKWEB
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    ports:
+      - target: 80
+        published: 80
+        protocol: tcp
+        mode: host
+    volumes:
+      - type: bind
+        source: .
+        target: /workspace
+    depends_on:
+      - db
+      - phpmyadmin
+
+  db:
+    image: mysql:latest
+    container_name: TellerSDKDataBase
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: tellersdk
+      MYSQL_USER: username
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  phpmyadmin:
+    container_name: TellerSDKPHPMyAdmin
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: tellersdk
+      MYSQL_USER: username
+      MYSQL_PASSWORD: password
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+
+  mailhog:
+    container_name: TellerSDKMailServer
+    image: mailhog/mailhog
+    ports:
+      - target: 8025
+        published: 8025
+        protocol: tcp
+        mode: host
+
