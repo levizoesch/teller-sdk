@@ -4,6 +4,7 @@ namespace LeviZoesch\TellerSDK;
 
 use JsonException;
 use LeviZoesch\TellerSDK\Enums\EnvironmentTypes;
+use LeviZoesch\TellerSDK\Exceptions\MissingTellerConfigurationException;
 
 class TellerClient
 {
@@ -130,11 +131,19 @@ class TellerClient
 
     /**
      * @throws JsonException
+     * @throws \Exception
      */
     private function request($method, $path, $data = null): bool|string
     {
+
+        $configFilePath = config_path('teller.php');
+
+        if (!file_exists($configFilePath)) {
+            throw new MissingTellerConfigurationException();
+        }
         $url = $this->BASE_URL . $path;
         $accessToken = base64_encode($this->access_token .':');
+
         $headers = [
             'Content-Type: application/json',
             'Authorization: Basic ' . $accessToken
