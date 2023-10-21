@@ -66,46 +66,73 @@ $accessToken = "test_token_xxxxxxxxxx";
 ```
 
 ### List Accounts
+Returns a list of all accounts the end-user granted access to during enrollment in Teller Connect.
 ```php
 $teller = new TellerClient($accessToken);
 $allAccounts = $teller->listAccounts();
 ```
 ### List Accounts Count
+Returns a numeral count of the accounts linked to the given access token.
 ```php
 $teller = new TellerClient($accessToken);
 $totalAccountCount = $teller->accountsCount();
 ```
+### Destroy Account
+This deletes your application's authorization to access the given account as addressed by its id. This does not delete the account itself.
+```php
+$teller = new TellerClient($accessToken);
+$teller->destroyAccount($actId);
+```
 ### Get Account Details
+Retrieve a specific account by it's id.
 ```php
 $teller = new TellerClient($accessToken);
 $accountDetails = $teller->getAccountDetails($actId);
 ```
 ### Get Account Balances
+Provides your application with live, real-time account balances.
 ```php
 $teller = new TellerClient($accessToken);
 $balance = $teller->getAccountBalances($actId);
 ```
 ### List All Account Transactions
+Returns a list of all transactions belonging to the account.
 ```php
 $teller = new TellerClient($accessToken);
 $allAccountTransactions = $teller->listAccountTransactions($actId);
 ```
 ### Get the specific account transaction details
+Returns an individual transaction.
 ```php
 $teller = new TellerClient($accessToken);
-$allAccountTransactions = $teller->listAccountTransactions($actId, $trxId);
+$allAccountTransactions = $teller->getTransactionDetails($actId, $trxId);
 ```
 ### List Account Payees
+
 ```php
 $teller = new TellerClient($accessToken);
 $allAccountTransactions = $teller->listAccountPayees($actId, $scheme);
 ```
+## Payments
+This section is still in development. Contribute to help finish it...
 ### Create Account Payee
+Creates a beneficiary for sending payments from the given account.
 ```php
 $teller = new TellerClient($accessToken);
-$allAccountTransactions = $teller->createAccountPayee($actId, $scheme, $data);
+$data = {
+    "scheme": "zelle",
+    "address": "jackson.lewis@teller.io",
+    "name": "Jackson Lewis",
+    "type": "person"
+}
+$allAccountTransactions = $teller->createAccountPayee($actId, $data);
 ```
-
+### Identity
+Identity provides you with all of the accounts the end-user granted your application access authorization along with beneficial owner identity information for each of them. Beneficial owner information is attached to each account as it's possible the end-user is not the beneficial owner, e.g. a corporate account, or there is more than one beneficial owner, e.g. a joint account the end-user shares with their partner.
+```php
+$teller = new TellerClient($accessToken);
+$identity = $teller->listIdentity($actId);
+```
 # Webhooks
 You may want to consume the teller.io webhook. To do so, you will need to create a TellerWebhookController.
 

@@ -59,9 +59,17 @@ class TellerClient
     /**
      * @throws JsonException
      */
-    public function getAccountTransaction($accountId, $transactionId)
+    public function getTransactionDetails($accountId, $transactionId)
     {
         return $this->get("/accounts/{$accountId}/transactions/{$transactionId}");
+    }
+
+    /**
+     * @throws JsonException
+     */
+    public function destroyAccount($accountId)
+    {
+        return $this->destroy("/accounts/" . $accountId);
     }
 
     /**
@@ -75,9 +83,9 @@ class TellerClient
     /**
      * @throws JsonException
      */
-    public function createAccountPayee($accountId, $scheme, $data)
+    public function createAccountPayee($accountId, $data)
     {
-        return $this->post("/accounts/{$accountId}/payments/{$scheme}/payees", $data);
+        return $this->post("/accounts/{$accountId}/payees", $data);
     }
 
     /**
@@ -86,6 +94,14 @@ class TellerClient
     public function createAccountPayment($accountId, $scheme, $data)
     {
         return $this->post("/accounts/{$accountId}/payments/{$scheme}", $data);
+    }
+
+    /**
+     * @throws JsonException
+     */
+    public function listIdentity()
+    {
+        return $this->get('/identity');
     }
 
     /**
@@ -102,6 +118,14 @@ class TellerClient
     private function post($path, $data)
     {
         return json_decode($this->request('POST', $path, $data), false, 512, JSON_THROW_ON_ERROR);
+    }
+
+    /**
+     * @throws JsonException
+     */
+    private function destroy($path)
+    {
+        return json_decode($this->request('DELETE', $path), false, 512, JSON_THROW_ON_ERROR);
     }
 
     /**
@@ -137,11 +161,23 @@ class TellerClient
         }
 
         $response = curl_exec($curl);
-        //$error = curl_error($curl);
+        $statusCode = curl_getinfo($curl, CURLINFO_HTTP_CODE); // Get the HTTP status code
+        $error = curl_error($curl);
 
         curl_close($curl);
 
-        return $response;
+        if ($statusCode === 200) {
+            return $response;
+        } else {
+            $errorObj = json_decode($response, true);
+            if ($errorObj && isset($errorObj['error'])) {
+                $errorCode = $errorObj['error']['code'];
+                $errorMessage = $errorObj['error']['message'];
+                return "Error (HTTP $statusCode): $errorCode - $errorMessage";
+            } else {
+                return "Error (HTTP $statusCode): $error";
+            }
+        }
     }
 
 
