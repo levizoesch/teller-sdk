@@ -10,7 +10,7 @@
          backupStaticProperties="false">
   <testsuites>
     <testsuite name="Tests">
-      <file>tests/test.php</file>
+      <file>tests/TellerClientTest.php</file>
     </testsuite>
   </testsuites>
   <coverage>
