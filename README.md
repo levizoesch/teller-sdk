@@ -279,7 +279,7 @@ Add the javascript.
 
 document.addEventListener("DOMContentLoaded", function() {
     const tellerConnect = TellerConnect.setup({
-        applicationId: "{{ config('teller.TELLER.APP_ID') }}",
+        applicationId: "{{ config('teller.APP_ID') }}",
         onInit: function () {
             //console.log("Teller Connect has initialized");
         },
