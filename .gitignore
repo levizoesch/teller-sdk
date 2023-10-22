@@ -4,7 +4,6 @@
 /storage/*.key
 .phpunit.result.cache
 coverage.xml
-/.idea/
 /vendor/
 .env
 !/config/database.php
