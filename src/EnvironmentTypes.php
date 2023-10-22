@@ -1,6 +1,6 @@
 <?php
 
-namespace LeviZoesch\TellerSDK\Enums;
+namespace LeviZoesch\TellerSDK;
 
 use Illuminate\Validation\Rules\Enum;
 

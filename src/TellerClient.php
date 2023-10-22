@@ -2,8 +2,8 @@
 
 namespace LeviZoesch\TellerSDK;
 
+use Exception;
 use JsonException;
-use LeviZoesch\TellerSDK\Enums\EnvironmentTypes;
 use LeviZoesch\TellerSDK\Exceptions\MissingTellerConfigurationException;
 
 class TellerClient
@@ -131,7 +131,7 @@ class TellerClient
 
     /**
      * @throws JsonException
-     * @throws \Exception
+     * @throws Exception
      */
     private function request($method, $path, $data = null): bool|string
     {
