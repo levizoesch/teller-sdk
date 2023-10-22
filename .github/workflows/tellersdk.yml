@@ -43,7 +43,7 @@ jobs:
         run: composer install
 
       - name: Set Environment Variables
-        run: php artisan env:set TELLER_TEST_TOKEN=${{ secrets.TELLER_TEST_TOKEN }}
+        run: sed -i "s/TELLER_TEST_TOKEN=${{ secrets.TELLER_TEST_TOKEN }}/" .env ;
 
       - name: Run Tests
         run: ./vendor/bin/phpunit -c phpunit.xml --coverage-clover=coverage.xml ;
