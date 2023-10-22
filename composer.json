@@ -35,12 +35,12 @@
     },
     "autoload": {
         "psr-4": {
-            "LeviZoesch\\TellerSDK\\": "src"
+            "LeviZoesch\\TellerSDK\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "LeviZoesch\\TellerSDK\\Tests\\": "tests"
+            "LeviZoesch\\TellerSDK\\Tests\\": "tests/"
         }
     },
     "extra": {

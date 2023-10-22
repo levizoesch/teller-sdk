@@ -1,13 +1,14 @@
 <?php
 
 
+namespace LeviZoesch\TellerSDK\Tests;
 use Illuminate\Support\Facades\Date;
-use PHPUnit\Framework\TestCase;
+
 
 class TellerClientTest extends TestCase
 {
 
-    public function testTesting()
+    public function testPass()
     {
         $variable = true;
 
@@ -17,4 +18,10 @@ class TellerClientTest extends TestCase
 
         $this->assertTrue($variable, 'The value is not true.');
     }
+
+    public function testTellerTestTokenIsDefined()
+    {
+        $this->assertNull(config('teller.TEST_TOKEN'), 'The teller test token is missing from the environment file, or undefined.');
+    }
+
 }
