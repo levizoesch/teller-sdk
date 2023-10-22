@@ -12,6 +12,7 @@
     <testsuite name="Tests">
       <file>tests/TellerClientTest.php</file>
       <file>tests/TellerSDKServiceProviderTest.php</file>
+      <file>tests/TellerEnvironmentTypesTest.php</file>
     </testsuite>
   </testsuites>
   <coverage>
