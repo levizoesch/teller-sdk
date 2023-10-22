@@ -4,6 +4,7 @@ namespace LeviZoesch\TellerSDK;
 
 use Exception;
 use JsonException;
+use LeviZoesch\TellerSDK\Enums\EnvironmentTypes;
 use LeviZoesch\TellerSDK\Exceptions\MissingTellerConfigurationException;
 
 class TellerClient

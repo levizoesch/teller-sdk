@@ -2,7 +2,7 @@
 
 namespace LeviZoesch\TellerSDK\Tests;
 
-use LeviZoesch\TellerSDK\EnvironmentTypes;
+use LeviZoesch\TellerSDK\Enums\EnvironmentTypes;
 
 class TellerEnvironmentTypesTest extends TestCase
 {
