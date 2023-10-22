@@ -3,7 +3,6 @@
 namespace LeviZoesch\TellerSDK\Tests;
 use LeviZoesch\TellerSDK\Exceptions\MissingTellerConfigurationException;
 use LeviZoesch\TellerSDK\TellerClient;
-use PHPUnit\Framework\MockObject\MockObject;
 
 class TellerClientTest extends TestCase
 {
@@ -13,7 +12,6 @@ class TellerClientTest extends TestCase
         $teller = new TellerClient(config('teller.TEST_TOKEN'));
         $result = $teller->listAccounts();
         $this->assertJson($result);
-
     }
 
     public function testTellerTestTokenIsNotDefined()
