@@ -7,15 +7,6 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class TellerClientTest extends TestCase
 {
-    /** @var TellerClient|MockObject */
-    private $tellerClient;
-
-    protected function setUp(): void
-    {
-        $this->tellerClient = $this->getMockBuilder(TellerClient::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-    }
 
     public function testListAccounts()
     {
