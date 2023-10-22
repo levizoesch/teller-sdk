@@ -363,6 +363,10 @@ Exceptions will be thrown for various reasons. The exceptions are as follows:
 Please run 'php artisan vendor:publish --tag=teller-sdk-config' to generate.
 ```
 
+# Credits
+
+- [Levi Zoesch](https://github.com/levizoesch)
+
 # License
 
 ```
