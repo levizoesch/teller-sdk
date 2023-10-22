@@ -15,14 +15,10 @@
       <file>tests/TellerEnvironmentTypesTest.php</file>
     </testsuite>
   </testsuites>
-  <coverage cacheDirectory=".phpunit.cache/code-coverage"
-            processUncoveredFiles="true">
+  <coverage>
     <report>
       <clover outputFile="coverage.xml"/>
     </report>
-    <include>
-      <directory suffix=".php">./src</directory>
-    </include>
   </coverage>
   <php>
     <env name="APP_ENV" value="testing"/>
@@ -32,4 +28,9 @@
     <env name="QUEUE_CONNECTION" value="sync"/>
     <env name="SESSION_DRIVER" value="array"/>
   </php>
+  <source>
+    <include>
+      <directory suffix=".php">/src</directory>
+    </include>
+  </source>
 </phpunit>
