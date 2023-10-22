@@ -13,14 +13,16 @@ class TellerClientTest extends BaseTest
 //     */
 //    public function testListAccounts()
 //    {
-//        $teller = new TellerClient(config('teller.TEST_TOKEN'));
+//        $token = getenv('TELLER_TEST_TOKEN');
+//        $teller = new TellerClient($token);
 //        $result = $teller->listAccounts();
 //        $this->assertJson($result);
 //    }
 
-    public function testTellerTestTokenIsNotDefined()
+    public function testTellerTestTokenIsDefined()
     {
-        $this->assertNull(config('teller.TEST_TOKEN'), 'The teller test token is missing from the environment file, or undefined.');
+        $token = getenv('TELLER_TEST_TOKEN');
+        $this->assertIsString($token);
     }
 
     public function testMissingTellerConfigurationExceptionThrown() {

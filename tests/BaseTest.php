@@ -2,10 +2,15 @@
 namespace LeviZoesch\TellerSDK\Tests;
 
 
-use Orchestra\Testbench\Concerns\CreatesApplication;
-use Illuminate\Foundation\Testing\TestCase;
+use Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables;
 
-abstract class BaseTest extends TestCase
+abstract class BaseTest extends \Orchestra\Testbench\TestCase
 {
-    use CreatesApplication;
+    protected function getEnvironmentSetUp($app)
+    {
+        // make sure, our .env file is loaded
+        $app->useEnvironmentPath(__DIR__.'/..');
+        $app->bootstrapWith([LoadEnvironmentVariables::class]);
+        parent::getEnvironmentSetUp($app);
+    }
 }
