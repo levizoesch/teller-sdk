@@ -1,9 +1,9 @@
 <?php
 
 use LeviZoesch\TellerSDK\TellerSDKServiceProvider;
-use LeviZoesch\TellerSDK\Tests\TestCase;
+use LeviZoesch\TellerSDK\Tests\BaseTest;
 
-class TellerSDKServiceProviderTest extends TestCase
+class TellerSDKServiceProviderTest extends BaseTest
 {
     protected function getPackageProviders($app): array
     {

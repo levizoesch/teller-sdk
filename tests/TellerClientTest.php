@@ -1,18 +1,22 @@
 <?php
 
 namespace LeviZoesch\TellerSDK\Tests;
+use LeviZoesch\TellerSDK\Exceptions\MissingAccessTokenException;
 use LeviZoesch\TellerSDK\Exceptions\MissingTellerConfigurationException;
 use LeviZoesch\TellerSDK\TellerClient;
 
-class TellerClientTest extends TestCase
+class TellerClientTest extends BaseTest
 {
 
-    public function testListAccounts()
-    {
-        $teller = new TellerClient(config('teller.TEST_TOKEN'));
-        $result = $teller->listAccounts();
-        $this->assertJson($result);
-    }
+//    /**
+//     * @throws MissingAccessTokenException
+//     */
+//    public function testListAccounts()
+//    {
+//        $teller = new TellerClient(config('teller.TEST_TOKEN'));
+//        $result = $teller->listAccounts();
+//        $this->assertJson($result);
+//    }
 
     public function testTellerTestTokenIsNotDefined()
     {

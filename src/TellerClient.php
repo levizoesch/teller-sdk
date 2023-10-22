@@ -3,6 +3,7 @@
 namespace LeviZoesch\TellerSDK;
 
 use LeviZoesch\TellerSDK\Enums\EnvironmentTypes;
+use LeviZoesch\TellerSDK\Exceptions\MissingAccessTokenException;
 use LeviZoesch\TellerSDK\Exceptions\MissingTellerConfigurationException;
 
 class TellerClient
@@ -11,8 +12,14 @@ class TellerClient
 
     private string $access_token;
 
+    /**
+     * @throws MissingAccessTokenException
+     */
     public function __construct($accessToken)
     {
+        if ($accessToken === null){
+            throw new MissingAccessTokenException();
+        }
         $this->access_token = $accessToken;
     }
 
