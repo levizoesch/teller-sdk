@@ -5,6 +5,7 @@
 .phpunit.result.cache
 coverage.xml
 /vendor/
+/.idea/
 .env
 !/config/database.php
 teller_cert.pem
