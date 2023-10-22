@@ -12,9 +12,7 @@ class TellerSDKServiceProviderTest extends TestCase
 
     public function testTellerSDKServiceProviderIsRegistered()
     {
-        // Verify that the service provider is registered
         $this->assertTrue($this->app->getProvider(TellerSDKServiceProvider::class) instanceof TellerSDKServiceProvider);
-
-        // You can add more assertions here, such as verifying configuration loading or other actions performed by the service provider.
+        $this->assertFileExists('config/teller.php');
     }
 }
