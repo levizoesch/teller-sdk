@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         backupGlobals="false"
+         backupGlobals="true"
          bootstrap="vendor/autoload.php"
          colors="true"
          processIsolation="true"
@@ -31,8 +31,6 @@
   <source>
     <include>
       <directory suffix=".php">./src</directory>
-      <directory suffix=".php">./src/Enums</directory>
-      <directory suffix=".php">./src/Exceptions</directory>
     </include>
   </source>
 </phpunit>

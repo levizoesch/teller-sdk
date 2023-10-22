@@ -2,8 +2,6 @@
 
 namespace LeviZoesch\TellerSDK;
 
-use Exception;
-use JsonException;
 use LeviZoesch\TellerSDK\Enums\EnvironmentTypes;
 use LeviZoesch\TellerSDK\Exceptions\MissingTellerConfigurationException;
 
@@ -18,121 +16,78 @@ class TellerClient
         $this->access_token = $accessToken;
     }
 
-    /**
-     * @throws JsonException
-     */
     public function listAccounts()
     {
         return $this->get('/accounts');
     }
 
-    /**
-     * @throws JsonException
-     */
     public function accountsCount(): int
     {
         return count($this->listAccounts());
     }
 
-    /**
-     * @throws JsonException
-     */
     public function getAccountDetails($accountId)
     {
         return $this->get("/accounts/{$accountId}/details");
     }
 
-    /**
-     * @throws JsonException
-     */
     public function getAccountBalances($accountId)
     {
         return $this->get("/accounts/{$accountId}/balances");
     }
 
-    /**
-     * @throws JsonException
-     */
     public function listAccountTransactions($accountId)
     {
         return $this->get("/accounts/{$accountId}/transactions");
     }
 
-    /**
-     * @throws JsonException
-     */
     public function getTransactionDetails($accountId, $transactionId)
     {
         return $this->get("/accounts/{$accountId}/transactions/{$transactionId}");
     }
 
-    /**
-     * @throws JsonException
-     */
     public function destroyAccount($accountId)
     {
         return $this->destroy("/accounts/" . $accountId);
     }
 
-    /**
-     * @throws JsonException
-     */
     public function listAccountPayees($accountId, $scheme)
     {
         return $this->get("/accounts/{$accountId}/payments/{$scheme}/payees");
     }
 
-    /**
-     * @throws JsonException
-     */
     public function createAccountPayee($accountId, $data)
     {
         return $this->post("/accounts/{$accountId}/payees", $data);
     }
 
-    /**
-     * @throws JsonException
-     */
     public function createAccountPayment($accountId, $scheme, $data)
     {
         return $this->post("/accounts/{$accountId}/payments/{$scheme}", $data);
     }
 
-    /**
-     * @throws JsonException
-     */
     public function listIdentity()
     {
         return $this->get('/identity');
     }
 
-    /**
-     * @throws JsonException
-     */
     public function get($path)
     {
         return json_decode($this->request('GET', $path), false, 512, JSON_THROW_ON_ERROR);
     }
 
-    /**
-     * @throws JsonException
-     */
     private function post($path, $data)
     {
         return json_decode($this->request('POST', $path, $data), false, 512, JSON_THROW_ON_ERROR);
     }
 
-    /**
-     * @throws JsonException
-     */
     private function destroy($path)
     {
         return json_decode($this->request('DELETE', $path), false, 512, JSON_THROW_ON_ERROR);
     }
 
     /**
-     * @throws JsonException
-     * @throws Exception
+     * @throws MissingTellerConfigurationException
      */
     private function request($method, $path, $data = null): bool|string
     {
@@ -189,6 +144,5 @@ class TellerClient
             }
         }
     }
-
 
 }

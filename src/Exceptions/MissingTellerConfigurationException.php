@@ -2,7 +2,6 @@
 
 namespace LeviZoesch\TellerSDK\Exceptions;
 
-use Illuminate\Http\Response;
 use Exception;
 
 class MissingTellerConfigurationException extends Exception
