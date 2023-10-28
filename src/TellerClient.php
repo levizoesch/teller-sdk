@@ -128,7 +128,7 @@ class TellerClient
             throw new EnvironmentNullException();
         }
 
-        if (!in_array($tellerEnvironment, ['sandbox', 'development', 'production'])) {
+        if (!in_array($tellerEnvironment, EnvironmentTypes::LIST)) {
             throw new InvalidEnvironmentException();
         }
 
@@ -169,7 +169,7 @@ class TellerClient
             throw new Exception("cURL request failed: $error");
         }
 
-        $statusCode = curl_getinfo($curl, CURLINFO_HTTP_CODE); // Get the HTTP status code
+        $statusCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         curl_close($curl);
 
         if ($statusCode === 200) {
