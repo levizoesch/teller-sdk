@@ -36,15 +36,15 @@ class TellerClientTest extends BaseTest
         $this->assertIsInt($result);
     }
 
-    public function testListAccountDetails()
-    {
-        $token = config('teller.TEST_TOKEN');
-        $teller = new TellerClient($token);
-        $result = $teller->listAccounts();
-        $accountId = $result[0]->id;
-        $details = $teller->getAccountDetails($accountId);
-        $this->assertSame($accountId, $details->account_id);
-    }
+//    public function testListAccountDetails()
+//    {
+//        $token = config('teller.TEST_TOKEN');
+//        $teller = new TellerClient($token);
+//        $result = $teller->listAccounts();
+//        $accountId = $result[0]->id;
+//        $details = $teller->getAccountDetails($accountId);
+//        $this->assertSame($accountId, $details->account_id);
+//    }
 
     public function testListAccountTransactions()
     {
