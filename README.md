@@ -13,8 +13,6 @@ A simple open source SDK to interact with Teller.io for Laravel ^9.0 & 10
 
 | Laravel | TellerSDK |
 |:--------|:----------|
-| 8.x     | 2.x       |
-| 9.x     | 2.x       |
 | 10.x    | 2.x       |
 
 ---
