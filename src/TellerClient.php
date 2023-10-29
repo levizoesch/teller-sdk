@@ -3,7 +3,6 @@
 namespace TellerSDK;
 
 use Exception;
-use GuzzleHttp\Exception\RequestException;
 use TellerSDK\Enums\EnvironmentTypes;
 use TellerSDK\Exceptions\InvalidEnvironmentException;
 use TellerSDK\Exceptions\MissingAccessTokenException;
@@ -12,7 +11,6 @@ use TellerSDK\Exceptions\MissingTellerConfigurationException;
 use TellerSDK\Exceptions\MissingTellerKeyException;
 use TellerSDK\Exceptions\EnvironmentNullException;
 use TellerSDK\Exceptions\UnexpectedErrorResponseException;
-use GuzzleHttp\Client;
 
 class TellerClient
 {
@@ -121,6 +119,7 @@ class TellerClient
      */
     private function request($method, $path, $data = null): bool|string
     {
+
         $configFilePath = config_path('teller.php');
 
         if (!file_exists($configFilePath)) {
@@ -128,11 +127,11 @@ class TellerClient
         }
 
         $url = $this->BASE_URL . $path;
-        $accessToken = base64_encode($this->access_token . ':');
+        $accessToken = base64_encode($this->access_token .':');
 
         $headers = [
-            'Content-Type' => 'application/json',
-            'Authorization' => 'Basic ' . $accessToken,
+            'Content-Type: application/json',
+            'Authorization: Basic ' . $accessToken
         ];
 
         $tellerEnvironment = config('teller.ENVIRONMENT');
@@ -145,14 +144,17 @@ class TellerClient
             throw new InvalidEnvironmentException();
         }
 
-        $client = new Client();
+        $curl = curl_init();
 
-        $options = [
-            'headers' => $headers,
-        ];
+        curl_setopt_array($curl, [
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_CUSTOMREQUEST => $method,
+            CURLOPT_HTTPHEADER => $headers
+        ]);
 
         if ($data) {
-            $options['json'] = $data;
+            curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data, JSON_THROW_ON_ERROR));
         }
 
         if ($tellerEnvironment === EnvironmentTypes::PRODUCTION || $tellerEnvironment === EnvironmentTypes::DEVELOPMENT) {
@@ -167,29 +169,32 @@ class TellerClient
                 throw new MissingTellerKeyException();
             }
 
-            $options['cert'] = [$certPath];
-            $options['ssl_key'] = [$keyPath];
+            curl_setopt($curl, CURLOPT_SSLCERT, $certPath);
+            curl_setopt($curl, CURLOPT_SSLKEY, $keyPath);
         }
 
-        try {
-            $response = $client->request($method, $url, $options);
-            $statusCode = $response->getStatusCode();
-            $body = $response->getBody()->getContents();
+        $response = curl_exec($curl);
 
-            if ($statusCode === 200) {
-                return $body;
+        if ($response === false) {
+            $error = curl_error($curl);
+            curl_close($curl);
+            throw new Exception("cURL request failed: $error");
+        }
+
+        $statusCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+        curl_close($curl);
+
+        if ($statusCode === 200) {
+            return $response;
+        } else {
+            $errorObj = json_decode($response, true);
+            if ($errorObj && isset($errorObj['error'])) {
+                $errorCode = $errorObj['error']['code'];
+                $errorMessage = $errorObj['error']['message'];
+                return "Error (HTTP $statusCode): $errorCode - $errorMessage";
             } else {
-                $errorObj = json_decode($body, true);
-                if ($errorObj && isset($errorObj['error'])) {
-                    $errorCode = $errorObj['error']['code'];
-                    $errorMessage = $errorObj['error']['message'];
-                    return "Error (HTTP $statusCode): $errorCode - $errorMessage";
-                } else {
-                    throw new UnexpectedErrorResponseException();
-                }
+                throw new UnexpectedErrorResponseException();
             }
-        } catch (RequestException $e) {
-            throw new Exception("Guzzle request failed: " . $e->getMessage());
         }
     }
 
