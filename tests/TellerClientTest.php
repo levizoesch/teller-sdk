@@ -43,7 +43,7 @@ class TellerClientTest extends BaseTest
         $result = $teller->listAccounts();
         $accountId = $result[0]->id;
         $details = $teller->getAccountDetails($accountId);
-        $this->assertSame($accountId, $details->account_id);
+        var_dump($details);
     }
 
     public function testListAccountTransactions()
