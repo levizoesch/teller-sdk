@@ -1,6 +1,6 @@
 <?php
 
-namespace LeviZoesch\TellerSDK;
+namespace TellerSDK;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;

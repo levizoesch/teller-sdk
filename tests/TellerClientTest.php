@@ -1,9 +1,9 @@
 <?php
 
-namespace LeviZoesch\TellerSDK\Tests;
-use LeviZoesch\TellerSDK\Exceptions\MissingAccessTokenException;
-use LeviZoesch\TellerSDK\Exceptions\MissingTellerConfigurationException;
-use LeviZoesch\TellerSDK\TellerClient;
+namespace TellerSDK\Tests;
+use TellerSDK\Exceptions\MissingAccessTokenException;
+use TellerSDK\Exceptions\MissingTellerConfigurationException;
+use TellerSDK\TellerClient;
 
 class TellerClientTest extends BaseTest
 {

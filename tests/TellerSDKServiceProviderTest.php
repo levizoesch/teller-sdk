@@ -1,7 +1,7 @@
 <?php
 
-use LeviZoesch\TellerSDK\TellerSDKServiceProvider;
-use LeviZoesch\TellerSDK\Tests\BaseTest;
+use TellerSDK\TellerSDKServiceProvider;
+use TellerSDK\Tests\BaseTest;
 
 class TellerSDKServiceProviderTest extends BaseTest
 {

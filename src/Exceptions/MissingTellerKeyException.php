@@ -1,6 +1,6 @@
 <?php
 
-namespace LeviZoesch\TellerSDK\Exceptions;
+namespace TellerSDK\Exceptions;
 
 use Exception;
 

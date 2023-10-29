@@ -1,8 +1,8 @@
 <?php
 
-namespace LeviZoesch\TellerSDK\Tests;
+namespace TellerSDK\Tests;
 
-use LeviZoesch\TellerSDK\Enums\EnvironmentTypes;
+use TellerSDK\Enums\EnvironmentTypes;
 
 class TellerEnvironmentTypesTest extends BaseTest
 {

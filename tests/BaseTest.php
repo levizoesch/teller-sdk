@@ -1,5 +1,5 @@
 <?php
-namespace LeviZoesch\TellerSDK\Tests;
+namespace TellerSDK\Tests;
 
 
 use Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables;
