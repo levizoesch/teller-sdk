@@ -1,4 +1,5 @@
 # Teller API SDK
+![banner.png](banner.png)
 
 A simple open source SDK to interact with Teller.io for Laravel ^9.0 & 10
 
