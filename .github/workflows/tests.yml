@@ -1,4 +1,4 @@
-name: run-tests
+name: run-tests-pcov-pull
 
 on: [push]
 
@@ -9,7 +9,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
-        php: [8.1, 8.2]
+        php: [8.2]
         laravel: [10]
         stability: [prefer-dist]
 
@@ -26,16 +26,10 @@ jobs:
           extensions: dom, curl, libxml, mbstring, pcntl, pdo, sqlite, pdo_sqlite, bcmath, intl, iconv, fileinfo
           tools: phpunit:latest
           ini-values: memory_limit=512M
-          coverage: none
+          coverage: pcov
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # - name: Copy .env
-      #   run: cp .env.example .env
-        
-      # - name: Set Environment Variables
-      #   run: sed -i "s/TELLER_TEST_TOKEN=.*/TELLER_TEST_TOKEN=${{ secrets.TELLER_TEST_TOKEN }}/" .env
-        
       - name: Setup problem matchers for PHP
         run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
 
@@ -68,9 +62,13 @@ jobs:
       - name: Run Unit Tests
         run: php ./vendor/bin/paratest --cache-directory=".phpunit.cache/code-coverage" --strict-coverage --coverage-clover ./coverage.xml --processes=4
         env:
-           TELLER_TEST_TOKEN: ${{ secrets.TELLER_TEST_TOKEN }}
+          TELLER_TEST_TOKEN: ${{ secrets.TELLER_TEST_TOKEN }}
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage.xml
+          verbose: true
