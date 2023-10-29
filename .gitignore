@@ -12,3 +12,4 @@ teller_cert.pem
 teller_pk.pem
 /docker/wsl/DockerDesktopWSL/
 /.phpunit.cache/
+composer.lock
