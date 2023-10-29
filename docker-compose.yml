@@ -33,7 +33,7 @@ services:
       - DB_DATABASE=${DB_DATABASE:-tellersdk}
       - DB_USERNAME=${DB_USERNAME:-username}
       - DB_PASSWORD=${DB_PASSWORD:-password}
-
+      - TELLER_TEST_TOKEN=${TELLER_TEST_TOKEN:-test_token_example}
   web:
     container_name: TellerSDKWEB
     build:
