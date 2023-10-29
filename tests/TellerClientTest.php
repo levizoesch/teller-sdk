@@ -46,6 +46,18 @@ class TellerClientTest extends BaseTest
         $this->assertSame($accountId, $transactions[0]->account_id);
     }
 
+    public function testListAccountTransactionDetails()
+    {
+        $token = config('teller.TEST_TOKEN');
+        $teller = new TellerClient($token);
+        $result = $teller->listAccounts();
+        $accountId = $result[0]->id;
+        $transactions = $teller->listAccountTransactions($accountId);
+        $details = $teller->getTransactionDetails($accountId, $transactions[0]->id);
+
+        $this->assertSame($accountId, $details->account_id);
+    }
+
     public function testListAccountBalances()
     {
         $token = config('teller.TEST_TOKEN');
