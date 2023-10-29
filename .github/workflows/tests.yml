@@ -29,6 +29,7 @@ jobs:
           coverage: none
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TELLER_TEST_TOKEN: ${{ secrets.TELLER_TEST_TOKEN }}
 
       - name: Setup problem matchers for PHP
         run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
