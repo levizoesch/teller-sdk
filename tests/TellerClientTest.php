@@ -32,7 +32,7 @@ class TellerClientTest extends BaseTest
     {
         $token = null;
         $teller = new TellerClient($token);
-        $this->expectException(MissingTellerConfigurationException::class);
+        $this->expectException(MissingAccessTokenException::class);
         $teller->listAccounts();
     }
 
