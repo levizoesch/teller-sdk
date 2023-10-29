@@ -167,7 +167,8 @@ class TellerClient
                 throw new MissingTellerKeyException();
             }
 
-            $options['cert'] = [$certPath, $keyPath];
+            $options['cert'] = [$certPath];
+            $options['ssl_key'] = [$keyPath];
         }
 
         try {
