@@ -31,9 +31,8 @@ class TellerClientTest extends BaseTest
     public function testListAccountsMissingAccessTokenExceptionThrown()
     {
         $token = null;
-        $teller = new TellerClient($token);
         $this->expectException(MissingAccessTokenException::class);
-        $teller->listAccounts();
+        $teller = new TellerClient($token);
     }
 
     public function testTellerTestTokenIsDefined()
