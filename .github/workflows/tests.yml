@@ -29,8 +29,10 @@ jobs:
           coverage: none
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TELLER_TEST_TOKEN: ${{ secrets.TELLER_TEST_TOKEN }}
 
+      - name: Set Environment Variables
+        run: sed -i "s/TELLER_TEST_TOKEN=.*/TELLER_TEST_TOKEN=${{ secrets.TELLER_TEST_TOKEN }}/" .env
+        
       - name: Setup problem matchers for PHP
         run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
 
