@@ -28,6 +28,16 @@ class TellerClientTest extends BaseTest
         $this->assertIsArray($result);
     }
 
+    public function testListAccountTransactions()
+    {
+        $token = config('teller.TEST_TOKEN');
+        $teller = new TellerClient($token);
+        $result = $teller->listAccounts();
+        $accountId = $result[0]->id;
+        $transactions = $teller->listAccountTransactions($accountId);
+        $this->assertSame($accountId, $transactions[0]->account_id);
+    }
+
     public function testListAccountBalances()
     {
         $token = config('teller.TEST_TOKEN');
@@ -35,7 +45,7 @@ class TellerClientTest extends BaseTest
         $result = $teller->listAccounts();
         $accountId = $result[0]->id;
         $balance = $teller->getAccountBalances($accountId);
-        $this->assertIsString($balance->account_id);
+        $this->assertSame($accountId, $balance->account_id);
     }
 
     public function testListAccountsMissingAccessTokenExceptionThrown()
