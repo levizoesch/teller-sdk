@@ -3,6 +3,7 @@
 namespace LeviZoesch\TellerSDK;
 
 use Exception;
+use GuzzleHttp\Exception\RequestException;
 use LeviZoesch\TellerSDK\Enums\EnvironmentTypes;
 use LeviZoesch\TellerSDK\Exceptions\InvalidEnvironmentException;
 use LeviZoesch\TellerSDK\Exceptions\MissingAccessTokenException;
@@ -11,7 +12,7 @@ use LeviZoesch\TellerSDK\Exceptions\MissingTellerConfigurationException;
 use LeviZoesch\TellerSDK\Exceptions\MissingTellerKeyException;
 use LeviZoesch\TellerSDK\Exceptions\EnvironmentNullException;
 use LeviZoesch\TellerSDK\Exceptions\UnexpectedErrorResponseException;
-
+use GuzzleHttp\Client;
 class TellerClient
 {
     private string $BASE_URL = 'https://api.teller.io';
@@ -107,7 +108,6 @@ class TellerClient
      */
     private function request($method, $path, $data = null): bool|string
     {
-
         $configFilePath = config_path('teller.php');
 
         if (!file_exists($configFilePath)) {
@@ -115,11 +115,11 @@ class TellerClient
         }
 
         $url = $this->BASE_URL . $path;
-        $accessToken = base64_encode($this->access_token .':');
+        $accessToken = base64_encode($this->access_token . ':');
 
         $headers = [
-            'Content-Type: application/json',
-            'Authorization: Basic ' . $accessToken
+            'Content-Type' => 'application/json',
+            'Authorization' => 'Basic ' . $accessToken,
         ];
 
         $tellerEnvironment = config('teller.ENVIRONMENT');
@@ -132,17 +132,14 @@ class TellerClient
             throw new InvalidEnvironmentException();
         }
 
-        $curl = curl_init();
+        $client = new Client();
 
-        curl_setopt_array($curl, [
-            CURLOPT_URL => $url,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_CUSTOMREQUEST => $method,
-            CURLOPT_HTTPHEADER => $headers
-        ]);
+        $options = [
+            'headers' => $headers,
+        ];
 
         if ($data) {
-            curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data, JSON_THROW_ON_ERROR));
+            $options['json'] = $data;
         }
 
         if ($tellerEnvironment === EnvironmentTypes::PRODUCTION || $tellerEnvironment === EnvironmentTypes::DEVELOPMENT) {
@@ -157,32 +154,28 @@ class TellerClient
                 throw new MissingTellerKeyException();
             }
 
-            curl_setopt($curl, CURLOPT_SSLCERT, $certPath);
-            curl_setopt($curl, CURLOPT_SSLKEY, $keyPath);
+            $options['cert'] = [$certPath, $keyPath];
         }
 
-        $response = curl_exec($curl);
+        try {
+            $response = $client->request($method, $url, $options);
+            $statusCode = $response->getStatusCode();
+            $body = $response->getBody()->getContents();
 
-        if ($response === false) {
-            $error = curl_error($curl);
-            curl_close($curl);
-            throw new Exception("cURL request failed: $error");
-        }
-
-        $statusCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-        curl_close($curl);
-
-        if ($statusCode === 200) {
-            return $response;
-        } else {
-            $errorObj = json_decode($response, true);
-            if ($errorObj && isset($errorObj['error'])) {
-                $errorCode = $errorObj['error']['code'];
-                $errorMessage = $errorObj['error']['message'];
-                return "Error (HTTP $statusCode): $errorCode - $errorMessage";
+            if ($statusCode === 200) {
+                return $body;
             } else {
-                throw new UnexpectedErrorResponseException();
+                $errorObj = json_decode($body, true);
+                if ($errorObj && isset($errorObj['error'])) {
+                    $errorCode = $errorObj['error']['code'];
+                    $errorMessage = $errorObj['error']['message'];
+                    return "Error (HTTP $statusCode): $errorCode - $errorMessage";
+                } else {
+                    throw new UnexpectedErrorResponseException();
+                }
             }
+        } catch (RequestException $e) {
+            throw new Exception("Guzzle request failed: " . $e->getMessage());
         }
     }
 
