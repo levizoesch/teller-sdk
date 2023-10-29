@@ -69,6 +69,9 @@ TELLER_ENVIRONMENT=sandbox
 TELLER_APP_ID=
 TELLER_PUBLIC_KEY=
 TELLER_WEBHOOK_SECRET_KEY=
+TELLER_KEY_PATH=
+TELLER_CERT_PATH=
+TELLER_TEST_TOKEN=
 ```
 
 #### Included Helper Command ([Laravel Set Environment](https://github.com/levizoesch/LaravelSetEnvironment))
@@ -81,6 +84,7 @@ php artisan env:set TELLER_ENIRONMENT=development
 php artisan env:set TELLER_APP_ID=
 php artisan env:set TELLER_PUBLIC_KEY=
 php artisan env:set TELLER_WEBHOOK_SECRET_KEY=
+...
 ```
 
 ### Available Teller.io Environments.
