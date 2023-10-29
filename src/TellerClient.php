@@ -41,9 +41,7 @@ class TellerClient
 
     public function getAccountDetails($accountId)
     {
-        $response = $this->request('GET', "/accounts/{$accountId}/details");
-        $data = $this->parseJsonResponse($response);
-        return $data;
+        return $this->get("/accounts/{$accountId}/details");
     }
 
     public function getAccountBalances($accountId)
@@ -198,24 +196,6 @@ class TellerClient
                 throw new UnexpectedErrorResponseException();
             }
         }
-    }
-
-    public function parseJsonResponse($response)
-    {
-        // Check if the response is empty or not a string
-        if (empty($response) || !is_string($response)) {
-            throw new Exception("Invalid or empty response");
-        }
-
-        // Attempt to decode the JSON response
-        $data = json_decode($response, false, 512, JSON_THROW_ON_ERROR);
-
-        // Check for JSON decoding errors
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            throw new Exception("JSON Error: " . json_last_error_msg());
-        }
-
-        return $data;
     }
 
 }
