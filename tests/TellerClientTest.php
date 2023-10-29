@@ -28,6 +28,14 @@ class TellerClientTest extends BaseTest
         $this->assertIsArray($result);
     }
 
+    public function testAccountsCount()
+    {
+        $token = config('teller.TEST_TOKEN');
+        $teller = new TellerClient($token);
+        $result = $teller->accountsCount();
+        $this->assertIsInt($result);
+    }
+
     public function testListAccountTransactions()
     {
         $token = config('teller.TEST_TOKEN');
