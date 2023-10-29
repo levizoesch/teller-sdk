@@ -36,18 +36,18 @@
     },
     "autoload": {
         "psr-4": {
-            "\TellerSDK\\": "src/"
+            "TellerSDK\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "\TellerSDK\\Tests\\": "tests/"
+            "TellerSDK\\Tests\\": "tests/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "\TellerSDK\\TellerSDKServiceProvider"
+                "TellerSDK\\TellerSDKServiceProvider"
             ]
         }
     },
