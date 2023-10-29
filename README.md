@@ -5,7 +5,7 @@ A simple open source SDK to interact with Teller.io for Laravel ^9.0 & 10
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/levizoesch/teller-sdk.svg?style=flat-square)](https://packagist.org/packages/levizoesch/teller-sdk)
 [![Total Downloads](https://img.shields.io/packagist/dt/levizoesch/teller-sdk.svg?style=flat-square)](https://packagist.org/packages/levizoesch/teller-sdk)
-[![Tests](https://github.com/levizoesch/tellersdk/actions/workflows/tellersdk.yml/badge.svg)](https://github.com/levizoesch/tellersdk/actions/workflows/tellersdk.yml)
+[![Tests](https://github.com/levizoesch/tellersdk/actions/workflows/run-tests-pcov-pull.yml/badge.svg)](https://github.com/levizoesch/tellersdk/actions/workflows/run-tests-pcov-pull.yml)
 [![codecov](https://codecov.io/gh/levizoesch/teller-sdk/graph/badge.svg?token=TTXHIKIRD4)](https://codecov.io/gh/levizoesch/teller-sdk)
 ---
 
