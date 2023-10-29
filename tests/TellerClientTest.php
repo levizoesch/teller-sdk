@@ -34,7 +34,8 @@ class TellerClientTest extends BaseTest
         $teller = new TellerClient($token);
         $result = $teller->listAccounts();
         $accountId = $result[0]->id;
-        $teller->getAccountBalances($accountId);
+        $balance = $teller->getAccountBalances($accountId);
+        $this->assertIsString($balance->account_id);
     }
 
     public function testListAccountsMissingAccessTokenExceptionThrown()
