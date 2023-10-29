@@ -67,3 +67,8 @@ jobs:
 
       - name: Run Unit Tests
         run: php ./vendor/bin/paratest --no-coverage --processes=4
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
