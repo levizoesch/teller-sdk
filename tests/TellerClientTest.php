@@ -28,6 +28,14 @@ class TellerClientTest extends BaseTest
         $this->assertIsArray($result);
     }
 
+    public function testListAccountsMissingAccessTokenExceptionThrown()
+    {
+        $token = null;
+        $teller = new TellerClient($token);
+        $this->expectException(MissingTellerConfigurationException::class);
+        $teller->listAccounts();
+    }
+
     public function testTellerTestTokenIsDefined()
     {
         $token = getenv('TELLER_TEST_TOKEN');
