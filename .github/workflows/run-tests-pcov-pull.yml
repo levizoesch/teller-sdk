@@ -59,6 +59,9 @@ jobs:
       - name: Setup problem matchers for PHPUnit
         run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
+      - name: Publish Config
+        run: php artisan vendor:publish --tag=teller-sdk-config
+        
       - name: Run Unit Tests
         run: php ./vendor/bin/paratest --cache-directory=".phpunit.cache/code-coverage" --strict-coverage --coverage-clover ./coverage.xml --processes=4
         env:
