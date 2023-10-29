@@ -11,13 +11,13 @@ class TellerClientTest extends BaseTest
    /**
     * @throws MissingAccessTokenException
     */
-   public function testListAccounts()
-   {
-       $token = config('teller.TEST_TOKEN');
-       $teller = new TellerClient($token);
-       $result = $teller->listAccounts();
-
-   }
+    public function testListAccounts()
+    {
+        $token = config('teller.TEST_TOKEN');
+        $teller = new TellerClient($token);
+        $result = $teller->listAccounts();
+        $this->assertIsArray($result);
+    }
 
     public function testTellerTestTokenIsDefined()
     {
