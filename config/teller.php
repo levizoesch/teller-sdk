@@ -8,8 +8,8 @@ return [
     'CERT_PATH' => base_path('teller_cert.pem'),
 
     'ENVIRONMENT' => env('TELLER_ENVIRONMENT', 'sandbox'),
-    'APP_ID' => env('TELLER_APP_ID', env('TELLER_APP_ID')),
-    'PUBLIC_KEY' => env('TELLER_PUBLIC_KEY', env('TELLER_PUBLIC_KEY')),
-    'WEBHOOK_SECRET_KEY' => env('TELLER_WEBHOOK_SECRET_KEY', env('TELLER_WEBHOOK_SECRET_KEY')),
-    'TEST_TOKEN' => env('TELLER_TEST_TOKEN',env('TELLER_TEST_TOKEN'))
+    'APP_ID' => env('TELLER_APP_ID'),
+    'PUBLIC_KEY' => env('TELLER_PUBLIC_KEY'),
+    'WEBHOOK_SECRET_KEY' => env('TELLER_WEBHOOK_SECRET_KEY'),
+    'TEST_TOKEN' => env('TELLER_TEST_TOKEN')
 ];

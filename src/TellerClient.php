@@ -86,11 +86,23 @@ class TellerClient
         return $this->get('/identity');
     }
 
+    /**
+     * @throws MissingTellerConfigurationException
+     * @throws \JsonException
+     * @throws MissingTellerKeyException
+     * @throws MissingTellerCertException
+     */
     public function get($path)
     {
         return json_decode($this->request('GET', $path), false, 512, JSON_THROW_ON_ERROR);
     }
 
+    /**
+     * @throws MissingTellerConfigurationException
+     * @throws \JsonException
+     * @throws MissingTellerKeyException
+     * @throws MissingTellerCertException
+     */
     private function post($path, $data)
     {
         return json_decode($this->request('POST', $path, $data), false, 512, JSON_THROW_ON_ERROR);
