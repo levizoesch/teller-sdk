@@ -30,11 +30,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Copy .env
-        run: cp .env.example .env
+      # - name: Copy .env
+      #   run: cp .env.example .env
         
-      - name: Set Environment Variables
-        run: sed -i "s/TELLER_TEST_TOKEN=.*/TELLER_TEST_TOKEN=${{ secrets.TELLER_TEST_TOKEN }}/" .env
+      # - name: Set Environment Variables
+      #   run: sed -i "s/TELLER_TEST_TOKEN=.*/TELLER_TEST_TOKEN=${{ secrets.TELLER_TEST_TOKEN }}/" .env
         
       - name: Setup problem matchers for PHP
         run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
