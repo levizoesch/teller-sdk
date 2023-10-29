@@ -36,18 +36,18 @@
     },
     "autoload": {
         "psr-4": {
-            "LeviZoesch\\TellerSDK\\": "src/"
+            "\TellerSDK\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "LeviZoesch\\TellerSDK\\Tests\\": "tests/"
+            "\TellerSDK\\Tests\\": "tests/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "LeviZoesch\\TellerSDK\\TellerSDKServiceProvider"
+                "\TellerSDK\\TellerSDKServiceProvider"
             ]
         }
     },

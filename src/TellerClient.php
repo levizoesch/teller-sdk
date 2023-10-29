@@ -1,18 +1,19 @@
 <?php
 
-namespace LeviZoesch\TellerSDK;
+namespace TellerSDK;
 
 use Exception;
 use GuzzleHttp\Exception\RequestException;
-use LeviZoesch\TellerSDK\Enums\EnvironmentTypes;
-use LeviZoesch\TellerSDK\Exceptions\InvalidEnvironmentException;
-use LeviZoesch\TellerSDK\Exceptions\MissingAccessTokenException;
-use LeviZoesch\TellerSDK\Exceptions\MissingTellerCertException;
-use LeviZoesch\TellerSDK\Exceptions\MissingTellerConfigurationException;
-use LeviZoesch\TellerSDK\Exceptions\MissingTellerKeyException;
-use LeviZoesch\TellerSDK\Exceptions\EnvironmentNullException;
-use LeviZoesch\TellerSDK\Exceptions\UnexpectedErrorResponseException;
+use TellerSDK\Enums\EnvironmentTypes;
+use TellerSDK\Exceptions\InvalidEnvironmentException;
+use TellerSDK\Exceptions\MissingAccessTokenException;
+use TellerSDK\Exceptions\MissingTellerCertException;
+use TellerSDK\Exceptions\MissingTellerConfigurationException;
+use TellerSDK\Exceptions\MissingTellerKeyException;
+use TellerSDK\Exceptions\EnvironmentNullException;
+use TellerSDK\Exceptions\UnexpectedErrorResponseException;
 use GuzzleHttp\Client;
+
 class TellerClient
 {
     private string $BASE_URL = 'https://api.teller.io';
