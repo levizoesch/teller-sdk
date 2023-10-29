@@ -8,7 +8,16 @@ use TellerSDK\TellerClient;
 class TellerClientTest extends BaseTest
 {
 
-   /**
+    public function testConfigMatchesEnv()
+    {
+        $envToken = getenv('TELLER_TEST_TOKEN');
+        $confToken = config('teller.TEST_TOKEN');
+
+        $this->assertSame($envToken,$confToken);
+    }
+
+
+    /**
     * @throws MissingAccessTokenException
     */
     public function testListAccounts()
