@@ -366,21 +366,21 @@ document.addEventListener("DOMContentLoaded", function() {
 # Exceptions
 Exceptions will be thrown for various reasons. The exceptions are as follows:
 
-#### MissingTellerConfigurationException
+### MissingTellerConfigurationException
 ```
 Please run 'php artisan vendor:publish --tag=teller-sdk-config' to generate.
 ```
 
-#### EnvironmentNullException
+### EnvironmentNullException
 This is thrown if the .env is not correctly defined. The configuration file looks for the `TELLER_ENVIRONMENT`. If it cannot locate it, this exception will be thrown.
-#### InvalidEnvironmentException
+### InvalidEnvironmentException
 The only accepted values are `sandbox`, `development`, or `production`. Any other values detected this exception will be thrown.
-#### MissingAccessTokenException
+### MissingAccessTokenException
 This is thrown if the access token for the users banking institution is null, or invalid.
-#### MissingTellerCertException & MissingTellerKeyException
-The SDK cannot locate the certificate `.pem` file located. Please see your `teller.php` config file to define its path.
-Each exception will show you which one you are missing.
-#### UnexpectedErrorResponseException
+### MissingTellerCertException & MissingTellerKeyException
+Each exception will show you which one you are missing, the certificate or the private key`.pem` file. Please see your `teller.php` config file to define their path.
+
+### UnexpectedErrorResponseException
 This is thrown if the error being produced was unexpected. Please let me know if you experience this exception as error reporting may need to be expanded further to catch these discrepancies.
 
 # Credits
