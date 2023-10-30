@@ -35,7 +35,7 @@ Remaining to do are around payments / zelle enabled institutions.
 
 Expand the exceptions thrown to better help contain edge cases that may be present in production.
 
-#### Unit Tests - In progress
+#### Unit Tests - In progress ( [![codecov](https://codecov.io/gh/levizoesch/teller-sdk/graph/badge.svg?token=TTXHIKIRD4)](https://codecov.io/gh/levizoesch/teller-sdk) )
 
 Unit testing is very important to me, as I do not want to introduce bugs to package users. Goal is to expand unit testing to 90% or greater.
 #### ~~Setup Codecov.com~~ &check; Completed
