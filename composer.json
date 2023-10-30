@@ -28,9 +28,9 @@
     "require-dev": {
         "brianium/paratest": "^4.0|^5.0|^6.0|^7.0",
         "nunomaduro/collision": "^4.0|^5.0|^6.0|^7.0",
-        "orchestra/testbench": "^8.13",
-        "pestphp/pest": "^2.24",
-        "pestphp/pest-plugin-laravel": "^2.2",
+        "orchestra/testbench": "^8.0",
+        "pestphp/pest": "^2.0",
+        "pestphp/pest-plugin-laravel": "^2.0",
         "phpunit/phpunit": "^9.0|^10.0"
     },
     "autoload": {
