@@ -14,9 +14,13 @@ A simple open source SDK to interact with Teller.io for Laravel ^9.0 & 10
 
 ### If you can help make this backward compatible for earlier versions of Laravel please submit a PR. Unit tests must pass to be accepted PR. This package should work for prior versions of Laravel, all the way back to laravel 5-6 era. The `run-tests-pcov-pull.yml` file will need to be updated accordingly.
 
-| Laravel | TellerSDK |
-|:--------|:----------|
-| 10.x    | 2.x       |
+| Laravel | TellerSDK | PHP Version |
+|:--------|:----------|:------------|
+| 10.x    | 2.x       | 8.1         |
+| 9.x     | 2.x       | 8.0 - 8.1   |
+| 8.x     | 2.x       | 7.3 - 8.1   |
+| 7.x     | Unknown   | 7.2 - 8.0   |
+| 6.x     | Unknown   | 7.2.5 - 8.0 |
 
 ---
 
@@ -173,7 +177,7 @@ $teller = new TellerClient($accessToken);
 $allAccountTransactions = $teller->getTransactionDetails($actId, $trxId);
 ```
 ### Identity
-Identity provides you with all of the accounts the end-user granted your application access authorization along with beneficial owner identity information for each of them. Beneficial owner information is attached to each account as it's possible the end-user is not the beneficial owner, e.g. a corporate account, or there is more than one beneficial owner, e.g. a joint account the end-user shares with their partner.
+Identity provides you with all the accounts the end-user granted your application access authorization along with beneficial owner identity information for each of them. Beneficial owner information is attached to each account as it's possible the end-user is not the beneficial owner, e.g. a corporate account, or there is more than one beneficial owner, e.g. a joint account the end-user shares with their partner.
 ```php
 $teller = new TellerClient($accessToken);
 $identity = $teller->listIdentity($actId);
