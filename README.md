@@ -1,8 +1,7 @@
 # Teller API SDK
 ![banner.png](banner.png)
 
-A simple open source SDK to interact with Teller.io for Laravel ^9.0 & 10
-
+An open source PHP SDK to interact with Teller.io on the Laravel framework.
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/levizoesch/teller-sdk.svg?style=flat-square)](https://packagist.org/packages/levizoesch/teller-sdk)
 [![Total Downloads](https://img.shields.io/packagist/dt/levizoesch/teller-sdk.svg?style=flat-square)](https://packagist.org/packages/levizoesch/teller-sdk)
