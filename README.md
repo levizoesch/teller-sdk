@@ -1,5 +1,5 @@
 # Teller API SDK
-![banner.png](banner.png)
+![banner.png](media/banner.png)
 
 An open source PHP SDK to interact with Teller.io on the Laravel framework.
 
@@ -13,13 +13,13 @@ An open source PHP SDK to interact with Teller.io on the Laravel framework.
 
 #### If you can help make this package stable for Laravel 6 & 7 please submit a PR.
 
-| Laravel | TellerSDK | PHP Version | Tests                                                                                                                                                                         |
-|:--------|:----------|:------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 10.x    | 2.x       | 8.1 - 8.2   | [![Laravel 10](https://github.com/levizoesch/tellersdk/actions/workflows/laravel-10.yml/badge.svg)](https://github.com/levizoesch/tellersdk/actions/workflows/laravel-10.yml) |
-| 9.x     | 2.x       | 8.0 - 8.1   | [![Laravel 9](https://github.com/levizoesch/tellersdk/actions/workflows/laravel-9.yml/badge.svg)](https://github.com/levizoesch/tellersdk/actions/workflows/laravel-9.yml)    |
-| 8.x     | 2.x       | 7.3 - 8.1   | [![Laravel 8](https://github.com/levizoesch/tellersdk/actions/workflows/laravel-8.yml/badge.svg)](https://github.com/levizoesch/tellersdk/actions/workflows/laravel-8.yml)    |
-| 7.x     | Unknown   | 7.2 - 8.0   | Missing                                                                                                                                                                       |
-| 6.x     | Unknown   | 7.2 - 8.0   | Missing                                                                                                                                                                       |
+| Laravel | TellerSDK         | PHP Version | Tests                                                                                                                                                                         |
+|:--------|:------------------|:------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 10.x    | 2.x               | 8.1 - 8.2   | [![Laravel 10](https://github.com/levizoesch/tellersdk/actions/workflows/laravel-10.yml/badge.svg)](https://github.com/levizoesch/tellersdk/actions/workflows/laravel-10.yml) |
+| 9.x     | 2.x               | 8.0 - 8.1   | [![Laravel 9](https://github.com/levizoesch/tellersdk/actions/workflows/laravel-9.yml/badge.svg)](https://github.com/levizoesch/tellersdk/actions/workflows/laravel-9.yml)    |
+| 8.x     | 2.x               | 7.3 - 8.1   | [![Laravel 8](https://github.com/levizoesch/tellersdk/actions/workflows/laravel-8.yml/badge.svg)](https://github.com/levizoesch/tellersdk/actions/workflows/laravel-8.yml)    |
+| 7.x     | ![i](media/i.png) | 7.2 - 8.0   | ![x](media/x.png)                                                                                                                                                             |
+| 6.x     | ![i](media/i.png) | 7.2 - 8.0   | ![x](media/x.png)                                                                                                                                                             |
 
 ---
 
@@ -270,7 +270,7 @@ Route::resource('teller/webhook', TellerWebhookController::class, [
 
 Now update your Teller.io developer dashboard and point the webhook to your project. See `Application` menu button on Teller
 
-![img.png](img.png)
+![img.png](media/img.png)
 
 ---
 
