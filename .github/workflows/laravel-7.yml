@@ -9,8 +9,8 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
-        php: [7.4]
-        laravel: [6,7]
+        php: [8.0]
+        laravel: [7]
         stability: [prefer-dist]
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
@@ -63,6 +63,6 @@ jobs:
         run: php vendor/bin/testbench vendor:publish --tag=teller-sdk-config
         
       - name: Run Unit Tests
-        run: php ./vendor/bin/phpunit
+        run: php ./vendor/bin/phpunit -c phpunit.xml
         env:
           TELLER_TEST_TOKEN: ${{ secrets.TELLER_TEST_TOKEN }}
