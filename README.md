@@ -15,11 +15,11 @@ An open source PHP SDK to interact with Teller.io on the Laravel framework.
 
 | Laravel | TellerSDK | PHP Version | Tests                                                                                                                                                                    |
 |:--------|:----------|:------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 10.x    | 2.x       | 8.1         | [![Tests](https://github.com/levizoesch/tellersdk/actions/workflows/laravel-10.yml/badge.svg)](https://github.com/levizoesch/tellersdk/actions/workflows/laravel-10.yml) |
+| 10.x    | 2.x       | 8.1 - 8.2   | [![Tests](https://github.com/levizoesch/tellersdk/actions/workflows/laravel-10.yml/badge.svg)](https://github.com/levizoesch/tellersdk/actions/workflows/laravel-10.yml) |
 | 9.x     | 2.x       | 8.0 - 8.1   | [![Tests](https://github.com/levizoesch/tellersdk/actions/workflows/laravel-9.yml/badge.svg)](https://github.com/levizoesch/tellersdk/actions/workflows/laravel-9.yml)   |
 | 8.x     | 2.x       | 7.3 - 8.1   | [![Tests](https://github.com/levizoesch/tellersdk/actions/workflows/laravel-8.yml/badge.svg)](https://github.com/levizoesch/tellersdk/actions/workflows/laravel-8.yml)   |
-| 7.x     | Unknown   | 7.2 - 8.0 | Missing |
-| 6.x     | Unknown   | 7.2 - 8.0 | Missing |
+| 7.x     | Unknown   | 7.2 - 8.0   | Missing |
+| 6.x     | Unknown   | 7.2 - 8.0   | Missing |
 
 ---
 
