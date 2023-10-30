@@ -137,13 +137,13 @@ $accessToken = "test_token_xxxxxxxxxx";
 Returns a list of all accounts the end-user granted access to during enrollment in Teller Connect.
 ```php
 $teller = new TellerClient($accessToken);
-$allAccounts = $teller->listAccounts();
+$listAccounts = $teller->listAccounts();
 ```
 ### List Accounts Count
 Returns a numeral count of the accounts linked to the given access token.
 ```php
 $teller = new TellerClient($accessToken);
-$totalAccountCount = $teller->accountsCount();
+$totalCount = $teller->accountsCount();
 ```
 ### Destroy Account
 This deletes your application's authorization to access the given account as addressed by its id. This does not delete the account itself.
@@ -161,19 +161,19 @@ $accountDetails = $teller->getAccountDetails($actId);
 Retrieves live, real-time account balances.
 ```php
 $teller = new TellerClient($accessToken);
-$balance = $teller->getAccountBalances($actId);
+$balances = $teller->getAccountBalances($actId);
 ```
 ### List All Account Transactions
 Returns a list of all transactions belonging to the account.
 ```php
 $teller = new TellerClient($accessToken);
-$allAccountTransactions = $teller->listAccountTransactions($actId);
+$transactions = $teller->listAccountTransactions($actId);
 ```
 ### Get the specific account transaction details
 Returns an individual transaction details.
 ```php
 $teller = new TellerClient($accessToken);
-$allAccountTransactions = $teller->getTransactionDetails($actId, $trxId);
+$transactionDetails = $teller->getTransactionDetails($actId, $trxId);
 ```
 ### Identity
 Identity provides you with all the accounts the end-user granted your application access authorization along with beneficial owner identity information for each of them. Beneficial owner information is attached to each account as it's possible the end-user is not the beneficial owner, e.g. a corporate account, or there is more than one beneficial owner, e.g. a joint account the end-user shares with their partner.
@@ -189,7 +189,7 @@ Depending on the banking institution, you may or may not have access to zelle fe
 
 ```php
 $teller = new TellerClient($accessToken);
-$allAccountTransactions = $teller->listAccountPayees($actId, $scheme);
+$listPayees = $teller->listAccountPayees($actId, $scheme);
 ```
 ## Payments
 This section is still in development. Contribute to help finish it...
