@@ -12,6 +12,8 @@ A simple open source SDK to interact with Teller.io for Laravel ^9.0 & 10
 
 # Version Compatibility
 
+### If you can help make this backward compatible for earlier versions of Laravel please submit a PR. Unit tests must pass to be accepted PR. This package should work for prior versions of Laravel, all the way back to laravel 5-6 era. The `run-tests-pcov-pull.yml` file will need to be updated accordingly.
+
 | Laravel | TellerSDK |
 |:--------|:----------|
 | 10.x    | 2.x       |
