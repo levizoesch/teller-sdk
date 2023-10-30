@@ -1,4 +1,4 @@
-name: laravel-8-9
+name: laravel-8
 
 on: [push]
 
@@ -10,7 +10,7 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         php: [8.0]
-        laravel: [8,9]
+        laravel: [8]
         stability: [prefer-dist]
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
