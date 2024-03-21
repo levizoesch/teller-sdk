@@ -98,6 +98,8 @@ php artisan env:set TELLER_WEBHOOK_SECRET_KEY=
 The available environments are
 `sandbox`, `development`, and `production` for your `TELLER_ENVIRONMENT`.
 
+The environment to use for enrolling the user's accounts. Valid values are `sandbox`, `development` and `production`. The `sandbox` environment never communicates with a real institution, it is used to create sandbox enrollments, accounts and tokens. The `development` environment is the same as `production` but is not billed and has a hard limit of 100 enrollments.
+
 ### Teller Certificates
 
 This package requires that you have the teller provided private key, and certificate .pem file present within your main directory. This is provided to you when you create a https://teller.io/ developer account.
