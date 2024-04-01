@@ -22,7 +22,7 @@
         "php": "^7.4|^8.0|^8.1|^8.2",
         "ext-curl": "*",
         "illuminate/contracts": "^8.0|^9.0|^10.0",
-        "levizoesch/laravelsetenvironment": "^1.0.2",
+        "levizoesch/laravel-set-environment": "^1.0",
         "spatie/laravel-package-tools": "^1.0"
     },
     "require-dev": {
