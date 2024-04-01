@@ -81,7 +81,7 @@ TELLER_CERT_PATH=
 TELLER_TEST_TOKEN=
 ```
 
-#### Included Helper Command ([Laravel Set Environment](https://github.com/levizoesch/LaravelSetEnvironment))
+#### Included Helper Command ([Laravel Set Environment](https://github.com/levizoesch/laravel-set-environment))
 This is helpful for automating your repository to push to local, staging, or production servers using a CLI like Bitbucket Pipeline, or Github.
 
 You may use to create, or update environment keys.
