@@ -1,0 +1,7 @@
+# Ignore all test and documentation with "export-ignore".
+/.github                                                export-ignore
+/tests                                                  export-ignore
+/media                                                  export-ignore
+/docker                                                 export-ignore
+docker-compose.yml                                      export-ignore
+phpunit.xml                                             export-ignore

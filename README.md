@@ -56,7 +56,7 @@ Develop models and migrations that are essential for the functionality of the pa
 # Contributions & Community
 I encourage others to contribute to this package &#x2764;
 
-To join the discord for discussions, and help please join us at [Teller SDK Discord Server](https://discord.gg/gzAevzAKxC)
+To join the discord for discussions and help, please join us at [Teller SDK Discord Server](https://discord.gg/gzAevzAKxC)
 
 ---
 
@@ -198,7 +198,7 @@ $listPayees = $teller->listAccountPayees($actId, $scheme);
 ## Payments
 This section is still in development. Contribute to help finish it...
 ### Create Account Payee
-Creates a beneficiary for sending payments from the given account.
+Create a beneficiary for sending payments from the given account.
 ```php
 $teller = new TellerClient($accessToken);
 $data = {
@@ -380,7 +380,7 @@ This is thrown if the .env is not correctly defined. The configuration file look
 ### InvalidEnvironmentException
 The only accepted values are `sandbox`, `development`, or `production`. Any other values detected this exception will be thrown.
 ### MissingAccessTokenException
-This is thrown if the access token for the users banking institution is null, or invalid.
+This is thrown if the access token for the user's banking institution is null, or invalid.
 ### MissingTellerCertException & MissingTellerKeyException
 Each exception will show you which one you are missing, the certificate or the private key`.pem` file. Please see your `teller.php` config file to define their path.
 
