@@ -1,16 +1,18 @@
 name: laravel-11
 
-on: [push]
+on:
+  - push
 
 jobs:
   test:
     runs-on: ${{ matrix.os }}
+
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
         php: [8.2]
-        laravel: [11]
+        laravel: [11, '12']
         stability: [prefer-dist]
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
@@ -18,7 +20,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-          
+
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -47,13 +49,13 @@ jobs:
       - name: Add token
         run: |
           composer config github-oauth.github.com ${{ secrets.GITHUB_TOKEN }}
-          
+
       - name: Install dependencies
-        if: steps.composer-cache.outputs.cache-hit != 'true'
+        if: "steps.composer-cache.outputs.cache-hit != 'true'"
         run: composer require "laravel/framework:${{ matrix.laravel }}.*" --no-interaction --no-update
 
       - name: Update dependencies
-        if: steps.composer-cache.outputs.cache-hit != 'true'
+        if: "steps.composer-cache.outputs.cache-hit != 'true'"
         run: composer update --${{ matrix.stability }} --no-interaction
 
       - name: Setup problem matchers for PHPUnit
@@ -61,7 +63,7 @@ jobs:
 
       - name: Publish Config
         run: php vendor/bin/testbench vendor:publish --tag=teller-sdk-config
-        
+
       - name: Run Unit Tests
         run: php ./vendor/bin/paratest --processes=4
         env:
